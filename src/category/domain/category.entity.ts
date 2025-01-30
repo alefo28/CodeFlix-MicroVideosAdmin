@@ -48,7 +48,9 @@ export class Category extends Entity {
 
   changeName(name: string): void {
     //ValidatorRules.values(name, "name").required().string().maxLength(255);
+    
     this.name = name;
+    
     Category.validate(this);
   }
 
@@ -81,7 +83,7 @@ export class Category extends Entity {
     return {
       category_id: this.category_id.id,
       name: this.name,
-      descrition: this.description,
+      description: this.description,
       is_active: this.is_active,
       created_at: this.created_at,
     };
