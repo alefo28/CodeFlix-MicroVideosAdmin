@@ -92,47 +92,7 @@ describe("Category Sequelize Repository Integration Test", () => {
   });
 
   describe("search method tests", () => {
-    /* it("should only apply paginate when other params are null", async () => {
-      const created_at = new Date();
-      const categories = Category.fake()
-        .theCategories(16)
-        .withName("Movie")
-        .withDescription(null)
-        .withCreatedAt(created_at)
-        .build();
-      try {
-        await repository.bulkInsert(categories);
-      } catch (error) {
-        console.log(error);
-      }
-      const spyToEntity = jest.spyOn(CategoryModelMapper, "toEntity");
-
-      const searchOutput = await repository.search(new CategorySearchParams());
-      expect(searchOutput).toBeInstanceOf(CategorySearchResult);
-      expect(spyToEntity).toHaveBeenCalledTimes(16);
-      expect(searchOutput.toJSON()).toMatchObject({
-        total: 16,
-        current_page: 1,
-        last_page: 2,
-        per_page: 15,
-      });
-      searchOutput.items.forEach((item) => {
-        expect(item).toBeInstanceOf(Category);
-        expect(item.category_id).toBeDefined();
-      });
-      const items = searchOutput.items.map((item) => item.toJSON());
-      expect(items).toMatchObject(
-        Array.from({ length: 15 }, () => ({
-          category_id: expect.any(String),
-          name: "Movie",
-          description: null,
-          is_active: true,
-          created_at: created_at,
-        }))
-      );
-      
-    }); */
-
+   
     it("should only apply paginate when other params are null", async () => {
       const created_at = new Date();
       const categories = Category.fake()
@@ -162,7 +122,7 @@ describe("Category Sequelize Repository Integration Test", () => {
         Array.from({ length: 15 }, () => ({
           category_id: expect.any(String),
           name: "Movie",
-          description: null,
+          description: null as any,
           is_active: true,
           created_at: created_at,
         }))
