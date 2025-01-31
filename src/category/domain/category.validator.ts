@@ -7,29 +7,21 @@ import {
 } from "class-validator";
 import { Category } from "./category.entity";
 import { ClassValidatorFields } from "../../shared/domain/validators/class-validator-fields";
+import { Notification } from "../../shared/domain/validators/notifications";
 
 class CategoryRules {
-  @MaxLength(255)
-  @IsString()
-  @IsNotEmpty()
+  @MaxLength(255, { groups: ["name"] })
   name: string;
 
-  @IsString()
-  @IsOptional()
-  description: string | null;
-
-  @IsBoolean()
-  @IsNotEmpty()
-  is_active: boolean;
-
-  constructor({ name, description, is_active }: Category) {
-    Object.assign(this, { name, description, is_active });
+  constructor(aggregate: Category) {
+    Object.assign(this, aggregate);
   }
 }
 
-export class CategoryValidator extends ClassValidatorFields<CategoryRules> {
-  validate(entity: Category) {
-    return super.validate(new CategoryRules(entity));
+export class CategoryValidator extends ClassValidatorFields {
+  validate(notification: Notification, data: any, fields?: string[]): boolean {
+    const newFields = fields?.length ? fields : ["name"];
+    return super.validate(notification, new CategoryRules(data), newFields);
   }
 }
 
