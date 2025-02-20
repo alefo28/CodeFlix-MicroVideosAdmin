@@ -213,6 +213,7 @@ const config: Config = {
   coverageDirectory: "../coverage",
   testEnvironment: "node",
   coverageProvider: "v8",
+
   collectCoverage: true,
   coverageThreshold: {
     global: {
@@ -222,10 +223,22 @@ const config: Config = {
       statements: 80,
     },
   },
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '.interface.ts',
+    '-interface.ts',
+    'shared/testing',
+    'shared-module/testing',
+    'validator-rules.ts',
+    '-fixture.ts',
+    '.input.ts',
+    '.d.ts',
+    '.dto.ts',
+  ],
 
   setupFilesAfterEnv: ["./core/shared/infra/testing/expect-helpers.ts"],
   clearMocks: true,
-  
+
 };
 
 export default config;

@@ -8,6 +8,7 @@ import { Category } from "@core/category/domain/category.entity";
 describe('CategoriesController (e2e)', () => {
     describe('/delete/:id (DELETE)', () => {
         const appHelper = startApp();
+
         describe('should a response error when id is invalid or not found', () => {
             const arrange = [
                 {
